@@ -3,8 +3,15 @@ plug-open.vim
 
 Augments [vim-plug](https://github.com/junegunn/vim-plug) to easily interact with the source of installed plugins.
 
+Installation
+---
+
+Install using your plugin manager of choice (e.g. `Plug 'NickTomlin/plug-open.vim'`).
+
+
 Usage
 ---
+
 
 plug-open defines `PlugOpen` and `PlugOpenRemote` and `PlugHome` commands.
 
