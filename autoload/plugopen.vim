@@ -1,13 +1,17 @@
 if v:version < 704
-  echo "PlugOpen; Unsupported Vim Version. Please use vim 7.4+"
+  echomsg "PlugOpen: Unsupported Vim Version. Please use vim 7.4+ or Neovim"
+  finish
+end
+
+if !exists(':Plug')
+  echomsg "PlugOpen: could not find vim-plug. Please install It or disable this plugin"
   finish
 end
 
 function! GetPlugin(name)
   let plugins = get(g:, 'plugs', {})
   if has_key(plugins, a:name)
-    let details = plugins[a:name]
-    return details
+    return plugins[a:name]
   else
     echomsg 'PlugOpen error: ' . a:name . ' Is not a registered plugin'
     return {}
@@ -15,7 +19,7 @@ function! GetPlugin(name)
 endfunction
 
 function! OpenRemote(path)
-  " vim 7.4+
+  " help netrw-gx
   call netrw#BrowseX(a:path, netrw#CheckIfRemote())
 endfunction
 
@@ -28,8 +32,7 @@ endfunction
 
 function! plugopen#remote(name)
   let details = GetPlugin(a:name)
-  if has_key(details, 'uri')
-    call OpenRemote(details.uri)
+  if has_key(details, 'uri') call OpenRemote(details.uri)
   endif
 endfunction
 
@@ -45,9 +48,9 @@ endfunction
 
 function! PlugFileComplete(A, L, P)
   let names = split(globpath(g:plug_home, '*'), "\n")
-  " splitting and joing seems silly but it allows us to capitalize
+  " splitting and joining seems silly but it allows us to capitalize
   " on -complete=custom's wildmenu tab completion functionality
-  " without having to write our own
+  " without having to write our own (more info :help :command-complete)
   return join(map(names , "fnamemodify(v:val, ':t')"), "\n")
 endfunction
 
