@@ -41,9 +41,9 @@ function! plugopen#home()
 endfunction
 
 function! DefineCommands()
-  command! -nargs=1 -complete=custom,PlugFileComplete PlugOpen call plugopen#local(<f-args>)
-  command! -nargs=1 -complete=custom,PlugFileComplete PlugOpenRemote call plugopen#remote(<f-args>)
-  command! -nargs=0 PlugHome call plugopen#home()
+  command! -bang -nargs=1 -complete=custom,PlugFileComplete PlugOpen call plugopen#local(<f-args>)
+  command! -bang -nargs=1 -complete=custom,PlugFileComplete PlugOpenRemote call plugopen#remote(<f-args>)
+  command! -bang -nargs=0 PlugHome call plugopen#home()
 endfunction
 
 function! PlugFileComplete(A, L, P)
